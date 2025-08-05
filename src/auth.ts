@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import { UserRole } from '@prisma/client'
+import { Adapter } from 'next-auth/adapters'
 import { Account, User, Session } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
@@ -11,10 +12,19 @@ import { getAccountByUserId } from './data/account'
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
 
 export const authOptions: any = {
+	adapter: PrismaAdapter(prisma) as Adapter,
+
+	session: {
+		strategy: 'jwt',
+		maxAge: 30 * 60, // 30 minutes
+		updateAge: 10 * 60, // 10 minutes
+	},
+
 	pages: {
 		signIn: '/auth/login',
 		error: '/auth/error',
 	},
+
 	events: {
 		async linkAccount({ user }: { user: User }) {
 			await prisma.user.update({
@@ -23,6 +33,7 @@ export const authOptions: any = {
 			})
 		},
 	},
+
 	callbacks: {
 		async signIn({ user, account }: { user: User; account: Account | null }) {
 			// Allow OAuth without email verification
@@ -50,6 +61,7 @@ export const authOptions: any = {
 
 			return true
 		},
+
 		async session({ session, token }: { session: Session; token: JWT }) {
 			if (token.sub && session.user) {
 				session.user.id = token.sub
@@ -68,6 +80,7 @@ export const authOptions: any = {
 
 			return session
 		},
+
 		async jwt({ token }: { token: JWT }) {
 			if (!token.sub) return token
 
@@ -86,9 +99,6 @@ export const authOptions: any = {
 			return token
 		},
 	},
-	adapter: PrismaAdapter(prisma),
-
-	session: { strategy: 'jwt' },
 
 	...authConfig,
 }
