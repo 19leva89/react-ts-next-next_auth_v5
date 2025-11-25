@@ -1,7 +1,7 @@
 'use server'
 
 import * as z from 'zod'
-import bcrypt from 'bcryptjs'
+import { compare, hash } from 'bcrypt-ts'
 
 import { auth } from '@/auth' // Import the new `auth()` function
 import { prisma } from '@/lib/prisma'
@@ -45,13 +45,13 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
 	}
 
 	if (values.password && values.newPassword && dbUser.password) {
-		const passwordsMatch = await bcrypt.compare(values.password, dbUser.password)
+		const passwordsMatch = await compare(values.password, dbUser.password)
 
 		if (!passwordsMatch) {
 			return { error: 'Incorrect password!' }
 		}
 
-		const hashedPassword = await bcrypt.hash(values.newPassword, 10)
+		const hashedPassword = await hash(values.newPassword, 10)
 		values.password = hashedPassword
 		values.newPassword = undefined
 	}

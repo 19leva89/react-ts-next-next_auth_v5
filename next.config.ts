@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
 		],
 		unoptimized: true,
 	},
+	// cacheComponents: true,
 	reactStrictMode: false,
 }
 

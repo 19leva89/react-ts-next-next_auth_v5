@@ -1,5 +1,6 @@
 import * as z from 'zod'
-import { UserRole } from '@prisma/client'
+
+import { UserRole } from '@/lib/prisma-enums'
 
 export const SettingsSchema = z
 	.object({

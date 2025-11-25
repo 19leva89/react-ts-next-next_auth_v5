@@ -1,9 +1,9 @@
 'use client'
 
 import { toast } from 'sonner'
-import { UserRole } from '@prisma/client'
 
 import { admin } from '@/actions/admin'
+import { UserRole } from '@/lib/prisma-enums'
 import { RoleGate } from '@/components/auth/role-gate'
 import { FormSuccess } from '@/components/form-success'
 import { Button, Card, CardContent, CardHeader } from '@/components/ui'

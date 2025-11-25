@@ -1,8 +1,8 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { UserRole } from '@prisma/client'
 
+import { UserRole } from '@/lib/prisma-enums'
 import { FormError } from '@/components/form-error'
 import { useCurrentRole } from '@/hooks/use-current-role'
 
