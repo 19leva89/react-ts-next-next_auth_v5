@@ -1,7 +1,7 @@
 'use server'
 
 import * as z from 'zod'
-import bcrypt from 'bcryptjs'
+import { hash } from 'bcrypt-ts'
 
 import { prisma } from '@/lib/prisma'
 import { getUserByEmail } from '@/data/user'
@@ -39,7 +39,7 @@ export const newPassword = async (values: z.infer<typeof NewPasswordSchema>, tok
 		return { error: 'Email does not exist!' }
 	}
 
-	const hashedPassword = await bcrypt.hash(password, 10)
+	const hashedPassword = await hash(password, 10)
 
 	await prisma.user.update({
 		where: { id: existingUser.id },

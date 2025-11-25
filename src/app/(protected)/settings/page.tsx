@@ -2,7 +2,6 @@
 
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
-import { UserRole } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import { useTransition, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -29,6 +28,7 @@ import {
 } from '@/components/ui'
 import { SettingsSchema } from '@/schemas'
 import { settings } from '@/actions/settings'
+import { UserRole } from '@/lib/prisma-enums'
 import { FormError } from '@/components/form-error'
 import { FormSuccess } from '@/components/form-success'
 import { useCurrentUser } from '@/hooks/use-current-user'

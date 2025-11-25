@@ -1,7 +1,6 @@
 'use server'
 
-import { UserRole } from '@prisma/client'
-
+import { UserRole } from '@/lib/prisma-enums'
 import { currentRole } from '@/lib/auth'
 
 export const admin = async () => {
