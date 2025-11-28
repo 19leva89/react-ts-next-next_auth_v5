@@ -4,14 +4,14 @@ import { Adapter } from 'next-auth/adapters'
 import { Account, User, Session } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
-import { UserRole } from '@/lib/prisma-enums'
 import { prisma } from '@/lib/prisma'
 import authConfig from '@/auth.config'
 import { getUserById } from '@/data/user'
+import { UserRole } from '@/lib/prisma-enums'
 import { getAccountByUserId } from './data/account'
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
 
-export const authOptions: any = {
+export const { auth, handlers, signIn, signOut } = NextAuth({
 	adapter: PrismaAdapter(prisma) as Adapter,
 
 	session: {
@@ -35,7 +35,7 @@ export const authOptions: any = {
 	},
 
 	callbacks: {
-		async signIn({ user, account }: { user: User; account: Account | null }) {
+		async signIn({ user, account }) {
 			// Allow OAuth without email verification
 			if (account?.provider !== 'credentials') return true
 
@@ -101,11 +101,4 @@ export const authOptions: any = {
 	},
 
 	...authConfig,
-}
-
-export const {
-	handlers: { GET, POST },
-	auth,
-	signIn,
-	signOut,
-} = NextAuth(authOptions)
+})
