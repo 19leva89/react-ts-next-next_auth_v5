@@ -22,9 +22,9 @@ import { FormSuccess } from '@/components/form-success'
 import { CardWrapper } from '@/components/auth/card-wrapper'
 
 export const ResetForm = () => {
+	const [isPending, startTransition] = useTransition()
 	const [error, setError] = useState<string | undefined>('')
 	const [success, setSuccess] = useState<string | undefined>('')
-	const [isPending, startTransition] = useTransition()
 
 	const form = useForm<z.infer<typeof ResetSchema>>({
 		resolver: zodResolver(ResetSchema),

@@ -29,9 +29,7 @@ export const UserInfo = ({ user, label }: Props) => {
 				<div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-xs'>
 					<p className='text-sm font-medium'>Email</p>
 
-					<p className='max-w-45 truncate rounded-md bg-slate-100 p-1 font-mono text-xs'>
-						{user?.email}
-					</p>
+					<p className='max-w-45 truncate rounded-md bg-slate-100 p-1 font-mono text-xs'>{user?.email}</p>
 				</div>
 
 				<div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-xs'>

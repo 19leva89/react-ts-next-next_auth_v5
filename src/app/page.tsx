@@ -11,7 +11,7 @@ const font = Poppins({
 
 export default function HomePage() {
 	return (
-		<main className='flex-col h-full flex items-center justify-center from-sky-400 to-blue-800 bg-radial'>
+		<main className='flex h-full flex-col items-center justify-center bg-radial from-sky-400 to-blue-800'>
 			<div className='space-y-6 text-center'>
 				<h1 className={cn('text-6xl font-semibold text-white drop-shadow-md', font.className)}>🔐 Auth</h1>
 
