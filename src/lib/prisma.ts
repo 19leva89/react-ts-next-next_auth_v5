@@ -1,13 +1,18 @@
 import 'dotenv/config'
 import { PrismaPg } from '@prisma/adapter-pg'
 
+import { getDatabaseUrl } from './prisma-cert'
+
 //! Do not change the path, made for seed.ts
 import { PrismaClient } from '../generated/prisma/client'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+// Get the database connection string with SSL parameters
+const databaseUrl = getDatabaseUrl()
+
 const adapter = new PrismaPg({
-	connectionString: process.env.DATABASE_URL!,
+	connectionString: databaseUrl,
 	// connectionParams: {
 	// 	ssl: {
 	// 		rejectUnauthorized: true,
