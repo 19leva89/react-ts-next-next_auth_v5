@@ -8,12 +8,12 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 const adapter = new PrismaPg({
 	connectionString: process.env.DATABASE_URL!,
-	connectionParams: {
-		ssl: {
-			rejectUnauthorized: true,
-			ca: process.env.CA_CERT,
-		},
-	},
+	// connectionParams: {
+	// 	ssl: {
+	// 		rejectUnauthorized: true,
+	// 		ca: process.env.CA_CERT,
+	// 	},
+	// },
 })
 
 const globalForPrisma = global as unknown as {
