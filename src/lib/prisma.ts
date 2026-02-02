@@ -6,7 +6,10 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../generated/prisma/client'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const connectionString = `${process.env.DATABASE_URL}`
+
+const connectionString = isProduction
+	? `${process.env.DATABASE_URL}&uselibpqcompat=true`
+	: `${process.env.DATABASE_URL}`
 
 const adapter = new PrismaPg({ connectionString })
 
